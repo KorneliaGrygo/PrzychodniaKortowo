@@ -7,31 +7,31 @@ from .managers import CustomUserManager
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-	"""
-		Custom defined user:
-		- login is considered as email field.
-	"""
+    """
+            Custom defined user:
+            - login is considered as email field.
+    """
 
-	first_name = models.CharField(
-	    max_length=64,
-	    help_text=_('Enter the first name: ')
-	)
+    first_name = models.CharField(
+        max_length=64,
+        help_text=_('Enter the first name: ')
+    )
 
     second_name = models.CharField(
-    	max_length=64, 
-    	help_text=_('Enter the second name: ')
+        max_length=64,
+        help_text=_('Enter the second name: ')
     )
 
     phone_number = models.CharField(
-    	max_length=12, 
-    	help_text=_('Enter the phone number: ')
+        max_length=12,
+        help_text=_('Enter the phone number: ')
     )
 
     email = models.EmailField(
-    	max_length=64,
-    	verbose_name =_('email address'),
-    	help_text=_('Enter the email field: '),
-    	unique=True
+        max_length=64,
+        verbose_name=_('email address'),
+        help_text=_('Enter the email field: '),
+        unique=True
     )
 
     is_active = models.BooleanField(default=True)
@@ -41,12 +41,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     # default username defined as email
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'second_name', 'email']
+    REQUIRED_FIELDS = ['first_name', 'second_name', 'phone_number']
 
     # Representing User object as string containing the email
     def __str__(self):
-    	return self.email
-
+        return self.email
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"

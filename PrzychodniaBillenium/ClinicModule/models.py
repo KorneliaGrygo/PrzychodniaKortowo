@@ -1,4 +1,4 @@
-import validators
+from . import validators
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
@@ -17,7 +17,7 @@ class Specialization(models.TextChoices):
 
 class VisitCategory(models.TextChoices):
 
-    INITAL = 'Initial visit', _('Initial visit')
+    INITIAL = 'Initial visit', _('Initial visit')
     CONTROL = 'Control visit', _('Control visit')
     TREATMENT = 'Treatment', _('Symptomatic treatment')
 
@@ -26,7 +26,7 @@ class Patient(models.Model):
     """
             Class defines the patient,
     """
-    user = models.OnetToOneField(
+    user = models.OneToOneField(
         User,
         on_delete=models.CASCADE)
 
@@ -52,7 +52,7 @@ class Doctor(models.Model):
             Model represents the doctor
     """
 
-    user = models.OnetToOneField(
+    user = models.OneToOneField(
         User,
         on_delete=models.CASCADE
     )
