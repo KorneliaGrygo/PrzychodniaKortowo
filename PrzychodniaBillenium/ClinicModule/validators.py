@@ -21,7 +21,7 @@ def validate_patient_pesel(value):
 
 def validate_zip_code(value):
         # Validate the zip code
-    match = re.search(r'^\d{2}-\d{3}$', value)
+    match = re.search(r'^\d{2}\d{3}$', value)
     if not match:
         raise ValidationError('The ZIP Code is invalid!')
 
