@@ -1,4 +1,5 @@
 from . import validators
+from datetime import date
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
@@ -100,6 +101,10 @@ class Visit(models.Model):
         editable=True
     )
 
+    visit_day_start = models.DateField(default=date.today, blank=True)
+    visit_time_start = models.TimeField(null=True, blank=True)
+    visit_time_end = models.TimeField(null=True, blank=True)
+
     # Short description of visit
     description = models.CharField(
         _('Short description (purpose) of the visit.'),
@@ -131,3 +136,73 @@ class Visit(models.Model):
             'date_added',
             'patient'
         ]
+
+
+class DrugPatient(models.Model):
+
+    patient = models.OneToOneField(Patient, on_delete=models.CASCADE)
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
+    drug = models.ForeignKey('DrugMedicine',
+                             related_name='drug_assigned',
+                             null=True,
+                             blank=True,
+                             on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{drug}'
+
+
+class VisitRecommendation(models.Model):
+    """
+        Model class for recommendations about the patient visit
+    """
+    visit = models.ForeignKey(Visit, on_delete=models.CASCADE)
+
+    # Description of the recommendation
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return f'{self.visit.identificator} - {self.visit.date_added}'
+
+
+class DrugMedicine(models.Model):
+
+    drug = models.CharField(max_length=128, blank=False)
+    description_of_drug = models.CharField(max_length=128, blank=False)
+
+    def __str__(self):
+        return f'{self.drug}'
+
+    class Meta:
+        ordering = [
+            'drug'
+        ]
+
+
+class Allergy(models.Model):
+
+    TYPE_ALLERGY = [
+        ('Food allergy', _('Food allergy')),
+        ('Inhalation allergy', _('Inhalation allergy')),
+        ('Contact Allergy', _('Contact Allergy')),
+        ('Injection allergy', _('Injection allergy'))
+    ]
+
+    ALLERGENS = [
+        ('Plant Allergens', _('Plant allergens')),
+        ('Animal Allergens', _('Animal allergens')),
+        ('Chemical Allergens', _('Chemical allergens'))
+    ]
+
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    allergy_type = models.CharField(
+        max_length=64, blank=True,
+        choices=TYPE_ALLERGY)
+
+    allergens_type = models.CharField(max_length=64, blank=True,
+                                      choices=ALLERGENS)
+
+    allergy_descrption = models.TextField()
+
+    def __str__(self):
+        return f'{self.allergy_type}'
