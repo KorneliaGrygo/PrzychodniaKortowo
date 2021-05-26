@@ -53,10 +53,15 @@ class Doctor(models.Model):
             Model represents the doctor
     """
 
-    user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE
+    first_name = models.CharField(
+        max_length=64,
+        blank=False,
+        null=False
     )
+
+    second_name = models.CharField(max_length=64,
+                                   blank=False,
+                                   null=False)
 
     specialization = models.CharField(
         max_length=32,
@@ -67,14 +72,15 @@ class Doctor(models.Model):
     # Order Doctors by ID
     class Meta:
         ordering = [
-            'id'
+            'second_name',
+            'specialization'
         ]
 
     # Description about their proffession, career etc.
     description = models.CharField(max_length=500)
 
     def __str__(self):
-        return f'Dr. {self.user.first_name} {self.user.second_name}'
+        return f'Dr. {self.first_name} {self.second_name}'
 
 
 class Visit(models.Model):
@@ -141,6 +147,7 @@ class Visit(models.Model):
 class DrugPatient(models.Model):
 
     patient = models.OneToOneField(Patient, on_delete=models.CASCADE)
+    visist = models.ForeignKey(Visit, on_delete=models.CASCADE)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     drug = models.ForeignKey('DrugMedicine',
                              related_name='drug_assigned',
@@ -149,7 +156,7 @@ class DrugPatient(models.Model):
                              on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{drug}'
+        return f'{self.drug}'
 
 
 class VisitRecommendation(models.Model):
@@ -162,20 +169,20 @@ class VisitRecommendation(models.Model):
     description = models.TextField(blank=True)
 
     def __str__(self):
-        return f'{self.visit.identificator} - {self.visit.date_added}'
+        return f'{self.visit.identificator}, {self.visit.patient}, {self.visit.date_added.strftime("%Y-%m-%d %H:%M:%S")}'
 
 
 class DrugMedicine(models.Model):
 
-    drug = models.CharField(max_length=128, blank=False)
+    drug_title = models.CharField(max_length=128, blank=False)
     description_of_drug = models.CharField(max_length=128, blank=False)
 
     def __str__(self):
-        return f'{self.drug}'
+        return f'{self.drug_title}'
 
     class Meta:
         ordering = [
-            'drug'
+            'drug_title'
         ]
 
 
@@ -205,4 +212,4 @@ class Allergy(models.Model):
     allergy_descrption = models.TextField()
 
     def __str__(self):
-        return f'{self.allergy_type}'
+        return f'{self.patient.PESEL} - {self.patient.user.second_name} - Type: {self.allergy_type}, Category: {self.allergens_type}'
