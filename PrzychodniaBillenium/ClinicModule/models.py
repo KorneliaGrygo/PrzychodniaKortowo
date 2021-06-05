@@ -135,7 +135,7 @@ class Visit(models.Model):
     )
 
     def __str__(self):
-        return f'ID: {self.identificator}'
+        return f'ID: {self.identificator}, Patient: {self.patient.user.second_name}, Doctor: {self.doctor.second_name}'
 
     class Meta:
         ordering = [
@@ -147,7 +147,7 @@ class Visit(models.Model):
 class DrugPatient(models.Model):
 
     patient = models.OneToOneField(Patient, on_delete=models.CASCADE)
-    visist = models.ForeignKey(Visit, on_delete=models.CASCADE)
+    visit = models.ForeignKey(Visit, on_delete=models.CASCADE)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     drug = models.ForeignKey('DrugMedicine',
                              related_name='drug_assigned',

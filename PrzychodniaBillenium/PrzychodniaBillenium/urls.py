@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from ClinicModule import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 admin.site.site_header = "Przychodnia Kortowo - panel admina"
 admin.site.site_title = "Przychodnia Kortowo - panel admina"
@@ -23,4 +25,6 @@ admin.site.index_title = "Witaj w przychodni Kortowo!"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
+    path('', views.HomeView.as_view(), name='home'),
+    path('login/', views.LoginView.as_view())
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
