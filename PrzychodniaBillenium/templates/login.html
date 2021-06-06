@@ -5,8 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.83.1">
     <title>Logowanie - Przychodnia Kortowo</title>
 
 
@@ -34,12 +32,13 @@
     <link href="{% static 'css/signin.css' %}" rel="stylesheet">
   </head>
   <body class="text-center">
-    
+
+
 <main class="form-signin">
+  <h1 class="h3 mb-3 fw-normal">Logowanie</h1>
   <form action="" method="post">
     {% csrf_token %}
     <!--<img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">-->
-    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
     {% if form.errors %}
         {% for field in form %}
             {% for error in field.errors %}
@@ -56,20 +55,22 @@
     {% endif %}
     <div class="form-floating">
       <input id="username" name="username" type="email" class="form-control" placeholder="name@example.com">
-      <label for="username">{{ form.username.label_tag }}</label>
+      <label for="username">Adres email: </label>
     </div>
     <div class="form-floating">
       <input type="password" name="password" class="form-control" id="password" placeholder="Password">
-      <label for="password">{{ form.password.label_tag }}</label>
+      <label for="password">Hasło: </label>
     </div>
     <div class="checkbox mb-3">
       <label>
-        <input type="checkbox" value="remember-me"> Remember me
+        <input type="checkbox" value="remember-me"> Zapamiętaj mnie
       </label>
     </div>
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Zaloguj</button>
     <hr>
-    <button href="{% url 'home' %} " class="w-100 btn btn-lg btn-secondary" type="submit">Register</button>
+    <a href="{% url 'register' %}">
+      <button  class="w-100 btn btn-lg btn-secondary" type="button">Rejestracja</button>
+    </a>
     <p class="mt-5 mb-3 text-muted">&copy; Przychodnia Kortowo 2021</p>
   </form>
 </main>
