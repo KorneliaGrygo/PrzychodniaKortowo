@@ -15,7 +15,7 @@ admin.site.unregister(Group)
 class PatientAdmin(admin.ModelAdmin):
     list_display = ('person', 'address', 'city', 'PESEL', 'email', 'phone', )
     list_filter = ('user', )
-    search_fields = ('address','city',)
+    search_fields = ('user__first_name','user__second_name','address','city',)
 
     def person(self,obj):
         return f'{obj.user.first_name} {obj.user.second_name}'
@@ -36,13 +36,14 @@ class VisitAdmin(admin.ModelAdmin):
     list_display = ('first_name','second_name', 'doctor', 'category',
                     'visit_day_start', 'visit_time_start', 'visit_time_end',)
 
-    search_fields = ('patient',)
+    search_fields = ('patient__user__first_name','patient__user__second_name','doctor__first_name','doctor__second_name')
 
     def first_name(self,obj):
         return obj.patient.user.first_name
 
     def second_name(self,obj):
         return obj.patient.user.second_name
+  
 
 
 @admin.register(models.DrugPatient)
