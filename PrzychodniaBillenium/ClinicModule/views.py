@@ -12,10 +12,10 @@ from django import forms
 
 
 class HomeView(TemplateView):
-    template_name = 'base.html'
+    template_name = 'home.html'
 
     def get(self, request, *args, **kwargs):
-        return HttpResponse('In Construction!')
+        return render(request,self.template_name,{})
 
 
 class LoginView(View):
