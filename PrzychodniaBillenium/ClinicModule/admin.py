@@ -36,7 +36,7 @@ class VisitAdmin(admin.ModelAdmin):
     list_display = ('first_name','second_name', 'doctor', 'category',
                     'visit_day_start', 'visit_time_start', 'visit_time_end',)
 
-    search_fields = ('patient__user__first_name','patient__user__second_name','doctor__first_name','doctor__second_name')
+    search_fields = ('patient__user__first_name','patient__user__second_name','doctor__first_name','doctor__second_name','category',)
 
     def first_name(self,obj):
         return obj.patient.user.first_name
