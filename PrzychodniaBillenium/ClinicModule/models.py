@@ -45,7 +45,7 @@ class Patient(models.Model):
     # Represents the Patient object as second name with PESEL ID.
 
     def __str__(self):
-        return f'{self.user.second_name} - {self.PESEL}'
+        return f'{self.user.second_name}'
 
 
 class Doctor(models.Model):
@@ -156,7 +156,7 @@ class DrugPatient(models.Model):
                              on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.drug}'
+        return f'{self.patient}'
 
 
 class VisitRecommendation(models.Model):
