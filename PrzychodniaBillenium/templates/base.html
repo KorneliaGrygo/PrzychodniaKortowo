@@ -1,17 +1,114 @@
+
 {% load static %}
 <!doctype html>
+<<<<<<< HEAD
 <html lang="en">
+=======
+<html lang="en" class="h-100">
+>>>>>>> origin/ola
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.83.1">
+    <title>Przychodnia Kortowo</title>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    <script src="{% static 'js/base.js' %}"></script>
-    <title>In construction!</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sticky-footer-navbar/">
+
+    
+
+    <!-- Bootstrap core CSS -->
+<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+
+    <!-- Favicons -->
+
+<meta name="theme-color" content="#7952b3">
+
+    <!-- Custom styles for this template -->
+    <link href="sticky-footer-navbar.css" rel="stylesheet">
   </head>
-  <body>
-    <h1>In construction!</h1>
+  <body class="d-flex flex-column h-100">
+    
+<header>
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Przychodnia Kortowo</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Główna</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Informacje</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Lekarze</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Kontakt</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <a href="/login "> <button class="btn btn-outline-success" type="button" style="margin-right:10px;">Zaloguj się</button></a>
+          <a href="/register"><button class="btn btn-outline-success" type="button">Zarejestruj się</button></a>
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- Begin page content -->
+<main role="main">
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <div class="container" style="margin-top:75px;">
+          <h1 class="display-3">Przychodnia Kortowo</h1>
+          <p>Projekt Przychodni Kortowo przygotowany przez grupe "Vege Świry"</p>
+          <p><a class="btn btn-primary btn-lg" href="/login" role="button"> Zaloguj się &raquo;</a></p>
+        </div>
+      </div>
+
+      <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+          <div class="col-md-4">
+            <h2>Lekarz Andrzej</h2>
+            <p>Opis lekarza lub opis specjalizacji lub zdjęcie lekarza. Opis lekarza lub opis specjalizacji lub zdjęcie lekarza. Opis lekarza lub opis specjalizacji lub zdjęcie lekarza.</p>
+            <p><a class="btn btn-secondary" href="#" role="button">Wyświetl szczegóły &raquo;</a></p>
+          </div>
+          <div class="col-md-4">
+            <h2>Lekarz Karol</h2>
+            <p>Opis lekarza lub opis specjalizacji lub zdjęcie lekarza. Opis lekarza lub opis specjalizacji lub zdjęcie lekarza. Opis lekarza lub opis specjalizacji lub zdjęcie lekarza.</p>
+            <p><a class="btn btn-secondary" href="#" role="button">Wyświetl szczegóły &raquo;</a></p>
+          </div>
+          <div class="col-md-4">
+            <h2>Lekarz Marek</h2>
+            <p>Opis lekarza lub opis specjalizacji lub zdjęcie lekarza. Opis lekarza lub opis specjalizacji lub zdjęcie lekarza. Opis lekarza lub opis specjalizacji lub zdjęcie lekarza.</p>
+            <p><a class="btn btn-secondary" href="#" role="button">Wyświetl szczegóły &raquo;</a></p>
+          </div>
+        </div>
+
+        <hr>
+
+      </div> <!-- /container -->
+
+    </main>
+
+<footer class="footer mt-auto py-3 bg-light">
+  <div class="container">
+    <span class="text-muted"> &copy; Przychodnia Kortowo 2021 </span>
+  </div>
+</footer>
+
+
+    <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+      
   </body>
 </html>
