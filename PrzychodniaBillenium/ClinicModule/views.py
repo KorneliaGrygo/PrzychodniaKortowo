@@ -13,9 +13,14 @@ from django.utils.translation import ugettext, ugettext_lazy as _
 # Create your views here.
 User = get_user_model()
 
-
 class HomeView(TemplateView):
     template_name = 'home.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request,self.template_name,{})
+
+class CalendarView(TemplateView):
+    template_name = 'fullcalendar.html'
 
     def get(self, request, *args, **kwargs):
         return render(request,self.template_name,{})

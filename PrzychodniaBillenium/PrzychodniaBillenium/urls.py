@@ -27,5 +27,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.HomeView.as_view(), name='home'),
     path('login/', views.LoginView.as_view(), name='login'),
-    path('register/', views.RegisterView.as_view(), name='register')
+    path('register/', views.RegisterView.as_view(), name='register'),
+    path('fullcalendar/', views.CalendarView.as_view(),name='calendar')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
