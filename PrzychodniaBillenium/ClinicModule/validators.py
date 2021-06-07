@@ -14,7 +14,7 @@ def validate_patient_pesel(value):
     is_valid = pesel.is_valid(value)
     if not is_valid:
         raise ValidationError(
-            _('PESEL jest nieprawidłowy.'), code='invalid')
+            _('pole jest nieprawidłowe.'), code='invalid')
 
     return value
 
@@ -23,10 +23,10 @@ def validate_patient_pesel(value):
 
 def validate_zip_code(value):
         # Validate the zip code
-    match = re.search(r'^\d{2}\d{3}$', value)
+    match = re.search(r'^\d{2}-\d{3}$', value)
     if not match:
         raise ValidationError(
-            _('Kod pocztowy jest nieprawidłowy.'), code='invalid')
+            _('pole jest nieprawidłowe.'), code='invalid')
 
     return value
 

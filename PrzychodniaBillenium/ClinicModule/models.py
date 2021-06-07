@@ -3,6 +3,7 @@ from datetime import date
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
+from django.forms import ModelForm
 
 # Create your models here.
 # Get the active user model - the custom model of User
@@ -213,3 +214,16 @@ class Allergy(models.Model):
 
     def __str__(self):
         return f'{self.patient.PESEL} - {self.patient.user.second_name} - Type: {self.allergy_type}, Category: {self.allergens_type}'
+
+
+class PatientForm(ModelForm):
+
+    class Meta:
+        model = Patient
+        fields = [
+            'user',
+            'PESEL',
+            'address',
+            'city',
+            'zip_code'
+        ]

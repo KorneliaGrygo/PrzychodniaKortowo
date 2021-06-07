@@ -56,3 +56,25 @@ class CustomUserForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput(), min_length=8, error_messages={
         'min_length': _('Hasło powinno zawierać co najmniej 8. znaków.'),
         'required': _('pole jest obligatoryjne do wypełnienia.')}, label=_('Hasło'))
+
+
+class PatientForm(forms.Form):
+
+    PESEL = forms.CharField(label=_('PESEL'), initial='', max_length=11, validators=[validators.validate_patient_pesel],
+                            error_messages={'required': _('pole jest obligatoryjne do wypełnienia.'),
+                                            'max_length': _('przekroczono limit znaków, maksymalna długość to 11.')})
+
+    address = forms.CharField(label=_('Adres'), initial='', max_length=32, validators=[RegexValidator(
+        r"[A-Za-z0-9'\.\-\s\,]", message=_("pole zawiera nieprawidłowy ciąg znaków."))],
+        error_messages={'required': _(
+            'pole jest obligatoryjne do wypełnienia.'),
+            'max_length': _('przekroczono limit znaków, maksymalna długość to 32.')})
+
+    city = forms.CharField(label=_('Miasto'), initial='+48', max_length=32, validators=[RegexValidator(
+        r'^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$', message=_('pole jest nieprawidłowe.'))],
+        error_messages={'required': _('pole jest obligatoryjne do wypełnienia.'),
+                        'max_length': _('przekroczono limit znaków, maksymalna długość to 32.')})
+
+    zip_code = forms.CharField(label=_('Kod pocztowy'), initial='10117', validators=[validators.validate_zip_code], max_length=6,
+                               error_messages={'required': _('pole jest obligatoryjne do wypełnienia.'),
+                                               'max_length': _('przekroczono limit znaków, maksymalna długość to 6.')},)
