@@ -1,14 +1,21 @@
+from collections import UserDict
+import re
 from urllib.parse import urlparse
 from django import forms
-from django.shortcuts import render, redirect
-from django.views.generic import TemplateView
+from django.db.models import query
+from django.db.models import fields
+from django.db.models.expressions import F
+from django.db.models.fields import NullBooleanField
+from django.shortcuts import get_object_or_404, render, redirect
+from django.urls.conf import path
+from django.views.generic import TemplateView, ListView,UpdateView,DetailView
 from django.views import View
-from django.http import HttpResponse
+from django.http import HttpResponse, request
 from ClinicModule import models
 from ClinicModule import forms as custom_forms
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, get_user_model
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserChangeForm
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django.db.utils import IntegrityError
 from django.http import HttpResponseRedirect
@@ -179,3 +186,41 @@ class RegisterView(View):
                 forms.ValidationError(request, _(
                     'Pola są nieprawidłowe.'))
             return render(request, self.template_name, {'form_register': form_register})
+
+
+
+class PatientDetails(ListView,View):
+    template_name = "patient_details.html"
+    def get_queryset(self):
+        return models.Patient.objects.filter(user=self.request.user)
+
+
+class PatientUpdate(UpdateView):
+    template_name = "patient_update.html"
+    model = models.Patient
+    form_class = custom_forms.UpdateProfileForm
+    def get(self,request):
+        if self.request.user.is_anonymous:
+            return redirect('login')
+        return render(request, self.template_name, {'form': self.form_class})
+    
+    def post(self,request,*args, **kwargs):
+        if self.request.user.is_anonymous:
+            return redirect('login/')
+        else:
+            form_update = self.custom_forms.UpdateProfileForm(request.POST)
+            if form_update.is_valid():
+                first_name = form_update.cleaned_data.get('first_name')
+                second_name = form_update.cleaned_data.get('second_name')
+                phone_number = form_update.cleaned_data.get('phone_number')
+                address = form_update.cleaned_data.get('address')
+                city = form_update.cleaned_data.get('city')
+                zip_code = form_update.cleaned_data.get('zip_code')
+            else:
+                return redirect('home')
+            user = models.Patient.objects.filter(user=self.request.user).update(first_name=first_name,second_name=second_name,phone_number=phone_number,address= address, city=city, zip_code=zip_code)
+            user.save()
+        return redirect('patient/details')
+            
+            
+            

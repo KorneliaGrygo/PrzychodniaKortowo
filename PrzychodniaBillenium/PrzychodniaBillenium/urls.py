@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from re import A
 from django.contrib import admin
 from django.urls import path
 from ClinicModule import views
@@ -31,4 +32,6 @@ urlpatterns = [
     path('update-profile/', views.UpdateProfileView.as_view(), name='update-profile'),
     path('visits-calendar/', views.CalendarView.as_view(), name='calendar'),
     path('?', views.LogoutView.as_view(), name='logout'),
+    path('patient/details/',views.PatientDetails.as_view(),name='patient-details'),
+    path('patient/details/update',views.PatientUpdate.as_view(),name='patient-update'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,3 +1,4 @@
+from ClinicModule.models import Patient
 from django import forms
 from ClinicModule import validators
 from django.utils.translation import ugettext, ugettext_lazy as _
@@ -76,5 +77,40 @@ class PatientForm(forms.Form):
                         'max_length': _('przekroczono limit znaków, maksymalna długość to 32.')})
 
     zip_code = forms.CharField(label=_('Kod pocztowy'), initial='10117', validators=[validators.validate_zip_code], max_length=6,
+                               error_messages={'required': _('pole jest obligatoryjne do wypełnienia.'),
+                                               'max_length': _('przekroczono limit znaków, maksymalna długość to 6.')},)
+
+
+
+
+class UpdateProfileForm(forms.Form):
+    first_name = forms.CharField(label=_('Imię'), max_length=32, validators=[RegexValidator(
+        r"^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$", message=_("pole zawiera nieprawidłowy ciąg znaków."))],
+        error_messages={'required': _('pole jest obligatoryjne do wypełnienia.'),
+                        'max_length': _('przekroczono limit znaków, maksymalna długość to 32.')})
+
+    second_name = forms.CharField(label=_('Nazwisko'), max_length=48, validators=[RegexValidator(
+        r"^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$", message=_("pole zawiera nieprawidłowy ciąg znaków."))],
+        error_messages={'required': _(
+            'pole jest obligatoryjne do wypełnienia.'),
+            'max_length': _('przekroczono limit znaków, maksymalna długość to 48.')})
+
+    phone_number = forms.CharField(label=_('Numer kontaktowy'), min_length=9, max_length=12, validators=[RegexValidator(
+        r'^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$', message=_('Numer kontakowy jest nieprawidłowy.'))],
+        error_messages={'required': _('pole jest obligatoryjne do wypełnienia.'),
+                        'max_length': _('przekroczono limit znaków, maksymalna długość to 12.'),
+                        'min_length': _('pole zawiera niewystarczającą ilość znaków (minimum: 9. znaków).')})
+    address = forms.CharField(label=_('Adres'), max_length=32, validators=[RegexValidator(
+        r"[A-Za-z0-9'\.\-\s\,]", message=_("pole zawiera nieprawidłowy ciąg znaków."))],
+        error_messages={'required': _(
+            'pole jest obligatoryjne do wypełnienia.'),
+        'max_length': _('przekroczono limit znaków, maksymalna długość to 32.')})
+
+    city = forms.CharField(label=_('Miasto'), max_length=32, validators=[RegexValidator(
+        r'^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$', message=_('pole jest nieprawidłowe.'))],
+        error_messages={'required': _('pole jest obligatoryjne do wypełnienia.'),
+                        'max_length': _('przekroczono limit znaków, maksymalna długość to 32.')})
+
+    zip_code = forms.CharField(label=_('Kod pocztowy'), validators=[validators.validate_zip_code], max_length=6,
                                error_messages={'required': _('pole jest obligatoryjne do wypełnienia.'),
                                                'max_length': _('przekroczono limit znaków, maksymalna długość to 6.')},)
