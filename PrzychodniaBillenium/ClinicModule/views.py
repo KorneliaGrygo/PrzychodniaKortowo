@@ -37,7 +37,9 @@ class CalendarView(TemplateView):
     template_name = 'fullcalendar.html'
 
     def get(self, request, *args, **kwargs):
-        return render(request, self.template_name, {})
+        # add here queryset for visits
+        queryset = ...
+        return render(request, self.template_name, {'data': queryset})
 
 
 class LoginView(View):
@@ -45,27 +47,34 @@ class LoginView(View):
     form_class = AuthenticationForm
 
     def get(self, request, *args, **kwargs):
-        form = self.form_class()
-        return render(request, self.template_name, {'form': form})
+        if self.request.user.is_anonymous:
+            form = self.form_class()
+            return render(request, self.template_name, {'form': form})
+        else:
+            return HttpResponse('Jesteś już zalogowany!')
 
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request, data=request.POST)
-        # Validate the form data
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                messages.info(request, f"You are now logged in as {username}.")
-                return redirect("home")
+        if self.request.user.is_anonymous:
+            form = self.form_class(request, data=request.POST)
+            # Validate the form data
+            if form.is_valid():
+                username = form.cleaned_data.get('username')
+                password = form.cleaned_data.get('password')
+                user = authenticate(username=username, password=password)
+                if user is not None:
+                    login(request, user)
+                    messages.info(
+                        request, f"You are now logged in as {username}.")
+                    return redirect("home")
+                else:
+                    forms.ValidationError(
+                        request, _("Login lub hasło jest nieprawidłowe."))
             else:
-                forms.ValidationError(
-                    request, _("Login lub hasło jest nieprawidłowe."))
+                forms.ValidationError(request, _(
+                    "Login lub hasło jest nieprawidłowe."))
+            return render(request, self.template_name, {'form': form})
         else:
-            forms.ValidationError(request, _(
-                "Login lub hasło jest nieprawidłowe."))
-        return render(request, self.template_name, {'form': form})
+            return HttpResponse('Jesteś już zalogowany!')
 
 
 class UpdateProfileView(View):
