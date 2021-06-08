@@ -1,2 +1,85 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+  <body class="d-flex flex-column h-100">
+<header>
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Przychodnia Kortowo</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Główna</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Informacje</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Wizyty</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Kontakt</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+        {% if user.is_authenticated %}
+        	<!-- add here href to logout -->
+          <a href="{% url 'logout' %}"><button class="btn btn-outline-light" type="button">Wyloguj się</button></a>
+        }
+        {% else %}
+          <a href="{% url 'login' %}"> <button class="btn btn-outline-light" type="button" style="margin-right:10px;">Zaloguj się</button></a>
+          <a href="{% url 'register' %}"><button class="btn btn-outline-light" type="button">Zarejestruj się</button></a>
+		</form>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- Begin page content -->
+<main role="main">
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron card card-image" style="background-image: url({% static 'img/background__3.jpg' %}); background-repeat: no-repeat; background-size: cover; background-size: 100% 100%; height: 50vh;">
+      	<div class="container" style="margin-top:75px;">
+		{% if user.is_authenticated %}
+          <h1 class="display-1">Witaj, {{ user.first_name }}!</h1>
+          <p class="lead">Z wielką chęcią chcemy Tobie pomóc. <br>Proszę, rozejrzyj się po wolnych terminach u Twojego ulubionego specjalisty: </p>
+          <p><a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button"> Umów się na wizytę &raquo;</a></p>
+        {% else %}
+        <div class="container" style="margin-top:75px;">
+          <h1 class="display-2">Przychodnia Kortowo</h1>
+          <p class="lead">Projekt Przychodni Kortowo przygotowany przez grupę "Vege Świry".</p>
+          <p><a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button"> Zaloguj się &raquo;</a></p>
+        {% endif %}
+        </div>        	
+		</div>
+      </div>
+      <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+        	{% if doctors %}
+        		{% for specialist in doctors %}
+          			<div class="col-md-4">
+            		<h2>Doktor {{ specialist.first_name }} {{ specialist.second_name }}</h2>
+            		<h3 class="lead">Specjalizacja: {{ specialist.specialization }}</h3>
+            		<p class="lead">{{ specialist.description }}</p>
+            	</div>
+            	{% endfor %}
+            {% endif %}
+        </div>
+
+        <hr>
+
+      </div> <!-- /container -->
+
+    </main>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  </body>
+  {% endblock %}
+
 

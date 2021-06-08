@@ -11,16 +11,26 @@ from django.contrib.auth import login, authenticate, get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django.db.utils import IntegrityError
+from django.http import HttpResponseRedirect
+from django.contrib.auth import logout
 
 # Create your views here.
 User = get_user_model()
+
+
+class LogoutView(View):
+
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return redirect('home')
 
 
 class HomeView(TemplateView):
     template_name = 'home.html'
 
     def get(self, request, *args, **kwargs):
-        return render(request, self.template_name, {})
+        doctor_queryset = models.Doctor.objects.all()
+        return render(request, self.template_name, {'doctors': doctor_queryset})
 
 
 class CalendarView(TemplateView):

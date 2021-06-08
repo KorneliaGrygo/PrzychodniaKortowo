@@ -11,17 +11,17 @@ User = get_user_model()
 
 class Specialization(models.TextChoices):
 
-    INTERNIST = 'Internist', _('Internist'),
-    GASTROLOGIST = 'Gastrologist', _('Gastrologist'),
-    OPHTHALMOLOGIST = 'Ophthalmologist', _('Ophthalmologist'),
-    PULMONOLOGIST = 'Pulmonologist', _('Pulmonologist')
+    INTERNIST = 'Internista', _('Internista'),
+    GASTROLOGIST = 'Gastrolog', _('Gastrolog'),
+    OPHTHALMOLOGIST = 'Okulista', _('Okulista'),
+    PULMONOLOGIST = 'Pulmonolog', _('Pulmonolog')
 
 
 class VisitCategory(models.TextChoices):
 
-    INITIAL = 'Initial visit', _('Initial visit')
-    CONTROL = 'Control visit', _('Control visit')
-    TREATMENT = 'Treatment', _('Symptomatic treatment')
+    INITIAL = 'Wizyta wstępna', _('Wizyta wstępna')
+    CONTROL = 'Wizyta kontrolona', _('Wizyta kontrolona')
+    TREATMENT = 'Leczenie', _('Leczenie objawowe')
 
 
 class Patient(models.Model):
@@ -136,7 +136,7 @@ class Visit(models.Model):
     )
 
     def __str__(self):
-        return f'ID: {self.identificator}, Patient: {self.patient.user.second_name}, Doctor: {self.doctor.second_name}'
+        return f'ID: {self.identificator}, Pacjent: {self.patient.user.second_name}, Doktor: {self.doctor.second_name}'
 
     class Meta:
         ordering = [
@@ -190,16 +190,16 @@ class DrugMedicine(models.Model):
 class Allergy(models.Model):
 
     TYPE_ALLERGY = [
-        ('Food allergy', _('Food allergy')),
-        ('Inhalation allergy', _('Inhalation allergy')),
-        ('Contact Allergy', _('Contact Allergy')),
-        ('Injection allergy', _('Injection allergy'))
+        ('Alergia na jadzenie', _('Alergia na jadzenie')),
+        ('Alergia wziewna', _('Alergia wziewna')),
+        ('Alergia kontaktowa', _('Alergia kontaktowa')),
+        ('Alergia na zastrzyki', _('Alergia na zastrzyki'))
     ]
 
     ALLERGENS = [
-        ('Plant Allergens', _('Plant allergens')),
-        ('Animal Allergens', _('Animal allergens')),
-        ('Chemical Allergens', _('Chemical allergens'))
+        ('Alergeny roślinne', _('Alergeny roślinne')),
+        ('Alergeny zwierzęce', _('Alergeny zwierzęce')),
+        ('Alergeny chemiczne', _('Alergeny chemiczne'))
     ]
 
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
