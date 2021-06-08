@@ -26,5 +26,9 @@ admin.site.index_title = "Witaj w przychodni Kortowo!"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.HomeView.as_view(), name='home'),
-    path('login/', views.LoginView.as_view())
+    path('login/', views.LoginView.as_view(), name='login'),
+    path('register/', views.RegisterView.as_view(), name='register'),
+    path('update-profile/', views.UpdateProfileView.as_view(), name='update-profile'),
+    path('visits-calendar/', views.CalendarView.as_view(), name='calendar'),
+    path('?', views.LogoutView.as_view(), name='logout'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
