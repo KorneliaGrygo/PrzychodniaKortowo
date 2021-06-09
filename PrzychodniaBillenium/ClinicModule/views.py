@@ -179,3 +179,5 @@ class RegisterView(View):
                 forms.ValidationError(request, _(
                     'Pola są nieprawidłowe.'))
             return render(request, self.template_name, {'form_register': form_register})
+class VisitView(TemplateView):
+    template_name = 'visits.html'

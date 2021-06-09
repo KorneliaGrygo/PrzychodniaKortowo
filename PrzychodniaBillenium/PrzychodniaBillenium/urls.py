@@ -31,4 +31,5 @@ urlpatterns = [
     path('update-profile/', views.UpdateProfileView.as_view(), name='update-profile'),
     path('visits-calendar/', views.CalendarView.as_view(), name='calendar'),
     path('?', views.LogoutView.as_view(), name='logout'),
+    path('visits/',views.VisitView.as_view(),name='visit'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
