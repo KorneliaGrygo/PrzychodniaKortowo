@@ -222,5 +222,11 @@ class PatientUpdate(UpdateView):
             user.save()
         return redirect('patient/details')
             
-            
-            
+
+
+class Regulations(TemplateView):
+    template_name = "regulations.html"           
+class Privacy(TemplateView):
+    template_name="politics.html"
+class Informations(TemplateView):
+    template_name = "informations.html"
