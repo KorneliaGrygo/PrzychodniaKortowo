@@ -3,6 +3,7 @@ from datetime import date
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
+from django.forms import ModelForm
 
 # Create your models here.
 # Get the active user model - the custom model of User
@@ -10,17 +11,17 @@ User = get_user_model()
 
 class Specialization(models.TextChoices):
 
-    INTERNIST = 'Internist', _('Internist'),
-    GASTROLOGIST = 'Gastrologist', _('Gastrologist'),
-    OPHTHALMOLOGIST = 'Ophthalmologist', _('Ophthalmologist'),
-    PULMONOLOGIST = 'Pulmonologist', _('Pulmonologist')
+    INTERNIST = 'Internista', _('Internista'),
+    GASTROLOGIST = 'Gastrolog', _('Gastrolog'),
+    OPHTHALMOLOGIST = 'Okulista', _('Okulista'),
+    PULMONOLOGIST = 'Pulmonolog', _('Pulmonolog')
 
 
 class VisitCategory(models.TextChoices):
 
-    INITIAL = 'Initial visit', _('Initial visit')
-    CONTROL = 'Control visit', _('Control visit')
-    TREATMENT = 'Treatment', _('Symptomatic treatment')
+    INITIAL = 'Wizyta wstępna', _('Wizyta wstępna')
+    CONTROL = 'Wizyta kontrolona', _('Wizyta kontrolona')
+    TREATMENT = 'Leczenie', _('Leczenie objawowe')
 
 
 class Patient(models.Model):
@@ -45,7 +46,7 @@ class Patient(models.Model):
     # Represents the Patient object as second name with PESEL ID.
 
     def __str__(self):
-        return f'{self.user.second_name} - {self.PESEL}'
+        return f'{self.user.second_name}'
 
 
 class Doctor(models.Model):
@@ -135,7 +136,7 @@ class Visit(models.Model):
     )
 
     def __str__(self):
-        return f'ID: {self.identificator}, Patient: {self.patient.user.second_name}, Doctor: {self.doctor.second_name}'
+        return f'ID: {self.identificator}, Pacjent: {self.patient.user.second_name}, Doktor: {self.doctor.second_name}'
 
     class Meta:
         ordering = [
@@ -156,7 +157,7 @@ class DrugPatient(models.Model):
                              on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.drug}'
+        return f'{self.patient}'
 
 
 class VisitRecommendation(models.Model):
@@ -189,16 +190,16 @@ class DrugMedicine(models.Model):
 class Allergy(models.Model):
 
     TYPE_ALLERGY = [
-        ('Food allergy', _('Food allergy')),
-        ('Inhalation allergy', _('Inhalation allergy')),
-        ('Contact Allergy', _('Contact Allergy')),
-        ('Injection allergy', _('Injection allergy'))
+        ('Alergia na jadzenie', _('Alergia na jadzenie')),
+        ('Alergia wziewna', _('Alergia wziewna')),
+        ('Alergia kontaktowa', _('Alergia kontaktowa')),
+        ('Alergia na zastrzyki', _('Alergia na zastrzyki'))
     ]
 
     ALLERGENS = [
-        ('Plant Allergens', _('Plant allergens')),
-        ('Animal Allergens', _('Animal allergens')),
-        ('Chemical Allergens', _('Chemical allergens'))
+        ('Alergeny roślinne', _('Alergeny roślinne')),
+        ('Alergeny zwierzęce', _('Alergeny zwierzęce')),
+        ('Alergeny chemiczne', _('Alergeny chemiczne'))
     ]
 
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
@@ -213,3 +214,16 @@ class Allergy(models.Model):
 
     def __str__(self):
         return f'{self.patient.PESEL} - {self.patient.user.second_name} - Type: {self.allergy_type}, Category: {self.allergens_type}'
+
+
+class PatientForm(ModelForm):
+
+    class Meta:
+        model = Patient
+        fields = [
+            'user',
+            'PESEL',
+            'address',
+            'city',
+            'zip_code'
+        ]

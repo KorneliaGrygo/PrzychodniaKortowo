@@ -13,11 +13,15 @@ class CustomUserManager(BaseUserManager):
         if not email:
             raise ValueError('Users must have an email address')
 
+        if not password:
+            raise ValueError('Users must have a password.')
+
         user = self.model(
             email=self.normalize_email(email),
             first_name=first_name,
             second_name=second_name,
-            phone_number=phone_number
+            phone_number=phone_number,
+            password=password
         )
 
         user.set_password(password)

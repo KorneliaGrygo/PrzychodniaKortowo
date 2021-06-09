@@ -1,7 +1,10 @@
+from django.db.models import fields
+
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.utils.translation import gettext_lazy as _
 from .managers import CustomUserManager
+from django.forms import ModelForm
 
 # Create your models here.
 
@@ -62,3 +65,15 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+
+def CustomUserForm(ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = [
+            'first_name',
+            'second_name',
+            'phone_number',
+            'email',
+            'password'
+        ]
