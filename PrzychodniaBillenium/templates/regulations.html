@@ -1,0 +1,89 @@
+
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>Regulamin - Przychodnia Kortowo</title>
+  
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+  
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/regulations.css' %}" rel="stylesheet">
+
+  </head>
+  <body >
+<header>
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">Przychodnia Kortowo</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link " aria-current="page" href="/">Główna</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="informations">Informacje</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Wizyty</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Kontakt</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+        {% if user.is_authenticated %}
+        	<!-- add here href to logout -->
+          <a href="{% url 'logout' %}"><button class="btn btn-outline-light" type="button">Wyloguj się</button></a>
+        }
+        {% else %}
+          <a href="{% url 'login' %}"> <button class="btn btn-outline-light" type="button" style="margin-right:10px;">Zaloguj się</button></a>
+          <a href="{% url 'register' %}"><button class="btn btn-outline-light" type="button">Zarejestruj się</button></a>
+		</form>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main class="center">
+
+</main>
+
+  <div class="mainContainer">
+    <h1 id="title">Regulamin Przychodni </h1>
+      <div class="regulationsBorder">
+        <h4>INFORMACJE OGÓLNE</h2>
+          <p>1. Niniejszy Regulamin określa zasady korzystania z usług weterynaryjnych świadczonych przez Przychodnię Weterynaryjną Małych Zwierząt Leonard Gugała z siedzibą  w Szczecinie przy ul. Chopina 53A oraz  Mieszka I 62.</p>
+          <p></p>
+          <h4>DEFINICJE I POJĘCIA</h2>
+            <p id="definition">2. Użyte w Regulaminie definicje i pojęcia oznaczają:</p>
+              <strong> Przychodnia Weterynaryjna Małych Zwierząt Leonard Gugała (ZLdZ) </strong> – zakład leczniczy o statusie przychodni weterynaryjnej (w rozumieniu ustawy z dnia 18 grudnia 2003r. o zakładach leczniczych dla zwierząt), zajmujący się profilaktyką, diagnostyką, leczeniem i rehabilitacją zwierząt domowych.
+
+              Regulamin Świadczenia Usług Weterynaryjnych (RŚUW) – niniejszy Regulamin Świadczenia Usług Weterynaryjnych w Przychodni Weterynaryjnej Małych Zwierząt Leonard Gugała wraz ze wszystkimi późniejszymi zmianami i załącznikami.
+              <br>
+              <br>
+              <p>3.<strong>Recepcja</strong> – punkt obsługi Opiekunów zwierząt korzystających z usług ZLdZ.
+              Cennik usług – stanowi załącznik Nr 1 do Regulaminu Świadczenia Usług Weterynaryjnych i jest dostępny do wglądu w Recepcji. </p>
+           
+               <p>4.<strong>Opiekun zwierzęcia</strong> – osoba fizyczna, osoba prawna lub jednostka organizacyjna nieposiadająca osobowości prawnej władająca zwierzęciem, również tymczasowo.</p>
+              <p> 5.<strong> Usługa weterynaryjna</strong> – czynność mającą na celu zachowanie, ratowanie lub poprawę zdrowia zwierząt.</p>
+              <p>6.<strong> Wizyta</strong> – przyjęcie Opiekuna zwierzęcia przez lekarza weterynarii na ZLdZ. W czasie wizyty mogą być wykonywane następujące usługi weterynaryjne: wywiad lekarski, badanie kliniczne zwierzęcia (badanie stanu zdrowia zwierzęcia), postawienie diagnozy lub podejrzenia choroby, wskazania do dodatkowych badań, wydanie zaleceń co do dalszego procesu leczenia zwierzęcia czy sposobu jego pielęgnacji, podawanie leków, zabiegi lekarsko – weterynaryjne, obserwacja zwierzęcia, pielęgnacja zwierzęcia, udzielenie porad i konsultacji, wykonanie opinii i orzeczeń. Zakres wizyty sugeruje lekarz uwzględniając dobro zwierzęcia, ochronę zdrowia publicznego i środowiska oraz.</p>
+              <p>7.<strong> Coś tam</strong> – przyjęcie Opiekuna zwierzęcia przez lekarza weterynarii na ZLdZ. W czasie wizyty mogą być wykonywane następujące usługi weterynaryjne: wywiad lekarski, badanie kliniczne zwierzęcia (badanie stanu zdrowia zwierzęcia), postawienie diagnozy lub podejrzenia choroby, wskazania do dodatkowych badań, wydanie zaleceń co do dalszego procesu leczenia zwierzęcia czy sposobu jego pielęgnacji, podawanie leków, zabiegi lekarsko – weterynaryjne, obserwacja zwierzęcia, pielęgnacja zwierzęcia, udzielenie porad i konsultacji, wykonanie opinii i orzeczeń. Zakres wizyty sugeruje lekarz uwzględniając dobro zwierzęcia, ochronę zdrowia publicznego i środowiska oraz.</p>
+               <p>8.<strong> Leczenie</strong> – is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p> <p>9.<strong> Warzywa</strong> – is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+               <p>10.<strong> Owoce</strong> – is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+
+      </div>
+  </div>
+
+    
+  </body>
+</html>

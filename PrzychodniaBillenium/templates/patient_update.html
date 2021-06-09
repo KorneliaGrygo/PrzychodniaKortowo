@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+<!doctype html>
+
+{% block head %}
+<html lang="en">
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>Przychodnia Kortowo</title>
+
+    <!--<link rel="canonical" href="{% static 'css/sticky-footer-navbar.css' %}">-->
+        <!-- Bootstrap core CSS -->
+<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+<link href="{% static 'css/sticky-footer-navbar.css' %}" rel="stylesheet">
+<link rel="icon" type="image/png" href="{% static 'picture/logo1.jpg' %}"/>
+
+<meta name="theme-color" content="#7952b3">
+    <!-- Custom styles for this template -->
+    <!-- Favicons -->
+</head>
+{% endblock %}
+    
+
+{% block body %}
+  <body class="d-flex flex-column h-100">
+
+    
+<header>
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Przychodnia Kortowo</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Główna</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Informacje</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Wizyty</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Kontakt</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+        {% if user.is_authenticated %}
+        	<!-- add here href to logout -->
+          <a href="{% url 'logout' %}"><button class="btn btn-outline-light" type="button">Wyloguj się</button></a>
+        }
+        {% else %}
+          <a href="{% url 'login' %}"> <button class="btn btn-outline-light" type="button" style="margin-right:10px;">Zaloguj się</button></a>
+          <a href="{% url 'register' %}"><button class="btn btn-outline-light" type="button">Zarejestruj się</button></a>
+		</form>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- Begin page content -->
+<main role="main" style="margin-top:50px;">
+
+     <br>
+  <form method="POST">
+  {% csrf_token %}
+
+  <table class="table table-bordered table-light">
+      {{form.as_table}}
+
+  </table>
+  <br>
+  <input type="submit" value="Save" class="btn  btn-dark">
+
+
+</form>
+
+    </main>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  </body>
+  {% endblock %}
+</html>
+
+
