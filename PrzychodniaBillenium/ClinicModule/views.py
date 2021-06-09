@@ -232,3 +232,5 @@ class Privacy(TemplateView):
     template_name="politics.html"
 class Informations(TemplateView):
     template_name = "informations.html"
+class ContactView(TemplateView):
+    template_name = "contact.html"

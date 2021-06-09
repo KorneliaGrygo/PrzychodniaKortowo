@@ -39,5 +39,6 @@ urlpatterns = [
     path('register/privacy/',views.Privacy.as_view(),name='privacy'),
     path('informations/',views.Informations.as_view(),name='informations'),
     path('visits/',views.VisitView.as_view(),name='visit'),
+    path('contact/',views.ContactView.as_view(),name='contact'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

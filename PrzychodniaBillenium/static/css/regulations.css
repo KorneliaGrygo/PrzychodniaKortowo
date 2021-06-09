@@ -45,3 +45,15 @@ body {
     padding: 5%;
     height: auto;
 }
+
+.contact{
+    align-items: center;
+    font-size: medium;
+    margin-top: 10px;
+    border: 7px solid #778584e5;
+    border-radius: 25px;
+    float: none;
+    padding: 5%;
+    width: 500px;
+    height: auto;
+}
