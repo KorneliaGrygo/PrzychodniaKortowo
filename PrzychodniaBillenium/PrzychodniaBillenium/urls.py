@@ -32,9 +32,12 @@ urlpatterns = [
     path('update-profile/', views.UpdateProfileView.as_view(), name='update-profile'),
     path('visits-calendar/', views.CalendarView.as_view(), name='calendar'),
     path('?', views.LogoutView.as_view(), name='logout'),
+
     path('patient/details/',views.PatientDetails.as_view(),name='patient-details'),
     path('patient/details/update',views.PatientUpdate.as_view(),name='patient-update'),
     path('register/regulations/',views.Regulations.as_view(),name='regulations'),
     path('register/privacy/',views.Privacy.as_view(),name='privacy'),
-    path('informations/',views.Informations.as_view(),name='informations')
+    path('informations/',views.Informations.as_view(),name='informations'),
+    path('visits/',views.VisitView.as_view(),name='visit'),
+
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

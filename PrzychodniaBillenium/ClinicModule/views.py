@@ -223,6 +223,8 @@ class PatientUpdate(UpdateView):
         return redirect('patient/details')
             
 
+class VisitView(TemplateView):
+    template_name = "visits.html"
 
 class Regulations(TemplateView):
     template_name = "regulations.html"           
